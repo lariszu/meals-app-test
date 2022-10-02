@@ -1,27 +1,19 @@
-import { useContext, useLayoutEffect } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { useLayoutEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 
-import IconButton from "../components/IconButton";
-import List from "../components/MealDetail/List";
-import Subtitle from "../components/MealDetail/Subtitle";
-import MealDetails from "../components/MealDetails";
-import { MEALS } from "../data/dummy-data";
-import { FavoritesContext } from "../store/context/favorites-context";
+import IconButton from '../components/IconButton';
+import List from '../components/MealDetail/List';
+import Subtitle from '../components/MealDetail/Subtitle';
+import MealDetails from '../components/MealDetails';
+import { MEALS } from '../data/dummy-data';
 
 function MealDetailScreen({ route, navigation }) {
-  const favoriteMealsCtx = useContext(FavoritesContext);
-
   const mealId = route.params.mealId;
+
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
-
-  function changeFavoriteStatusHandler() {
-    if (mealIsFavorite) {
-      favoriteMealsCtx.removeFavorite(mealId);
-    } else {
-      favoriteMealsCtx.addFavorite(mealId);
-    }
+  function headerButtonPressHandler() {
+    console.log('Pressed!');
   }
 
   useLayoutEffect(() => {
@@ -29,14 +21,14 @@ function MealDetailScreen({ route, navigation }) {
       headerRight: () => {
         return (
           <IconButton
-            icon={mealIsFavorite ? "star" : "star-outline"}
+            icon="star"
             color="white"
-            onPress={changeFavoriteStatusHandler}
+            onPress={headerButtonPressHandler}
           />
         );
       },
     });
-  }, [navigation, changeFavoriteStatusHandler]);
+  }, [navigation, headerButtonPressHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>
@@ -62,28 +54,28 @@ function MealDetailScreen({ route, navigation }) {
 
 export default MealDetailScreen;
 
-// const styles = StyleSheet.create({
-//   rootContainer: {
-//     marginBottom: 32,
-//   },
-//   image: {
-//     width: "100%",
-//     height: 350,
-//   },
-//   title: {
-//     fontWeight: "bold",
-//     fontSize: 24,
-//     margin: 8,
-//     textAlign: "center",
-//     color: "white",
-//   },
-//   detailText: {
-//     color: "white",
-//   },
-//   listOuterContainer: {
-//     alignItems: "center",
-//   },
-//   listContainer: {
-//     width: "80%",
-//   },
-// });
+const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 32,
+  },
+  image: {
+    width: '100%',
+    height: 350,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    margin: 8,
+    textAlign: 'center',
+    color: 'white',
+  },
+  detailText: {
+    color: 'white',
+  },
+  listOuterContainer: {
+    alignItems: 'center',
+  },
+  listContainer: {
+    width: '80%',
+  },
+});

@@ -1,28 +1,27 @@
 import {
   View,
-  Text,
   Pressable,
+  Text,
   Image,
   StyleSheet,
   Platform,
-} from "react-native";
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { useNavigation } from "@react-navigation/native";
-import MealDetails from "../MealDetails";
+import MealDetails from './MealDetails';
 
 function MealItem({
+  id,
   title,
   imageUrl,
   duration,
   complexity,
   affordability,
-  onPress,
-  id,
 }) {
   const navigation = useNavigation();
 
   function selectMealItemHandler() {
-    navigation.navigate("MealDetail", {
+    navigation.navigate('MealDetail', {
       mealId: id,
     });
   }
@@ -30,7 +29,7 @@ function MealItem({
   return (
     <View style={styles.mealItem}>
       <Pressable
-        android_ripple={{ color: "#ccc" }}
+        android_ripple={{ color: '#ccc' }}
         style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
         onPress={selectMealItemHandler}
       >
@@ -56,30 +55,29 @@ const styles = StyleSheet.create({
   mealItem: {
     margin: 16,
     borderRadius: 8,
-    overflow: "hidden",
-    backgroundColor: "white",
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    backgroundColor: 'white',
     elevation: 4,
-    shadowColor: "black",
-    shadowOpacity: 0.35,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 12,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
-  },
-  image: {
-    width: "100%",
-    height: 200,
-  },
-  title: {
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 18,
-    margin: 8,
-  },
-  innerContainer: {
-    borderRadius: 8,
-    overflow: "hidden",
+    shadowRadius: 8,
   },
   buttonPressed: {
     opacity: 0.5,
+  },
+  innerContainer: {
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: 200,
+  },
+  title: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 18,
+    margin: 8,
   },
 });

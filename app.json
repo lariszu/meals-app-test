@@ -1,12 +1,11 @@
 {
   "expo": {
-    "name": "Meals-App",
-    "slug": "Meals-App",
+    "name": "RNCourse",
+    "slug": "RNCourse",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "backgroundColor": "#24180f",
-    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -29,9 +28,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      ["expo-community-flipper", "0.164.0"]
-    ]
+    }
   }
 }
